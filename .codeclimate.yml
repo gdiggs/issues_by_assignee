@@ -1,0 +1,12 @@
+---
+engines:
+  bundler-audit:
+    enabled: true
+  fixme:
+    enabled: true
+  rubocop:
+    enabled: true
+ratings:
+  paths:
+  - Gemfile.lock
+  - bin/issues

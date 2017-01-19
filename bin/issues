@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+require "bundler"
+Bundler.require
+require "active_support/core_ext"
+
+Dotenv.load
+
+client = Github::Client::Issues.new(
+  oauth_token: ENV["GITHUB_TOKEN"],
+  auto_pagination: true,
+)
+
+grouped_issues =
+  client.list(state: "open", user: ENV["GITHUB_ORG"], filter: "all").
+  select { |issue| issue.assignee.present? }.
+  group_by { |issue| issue.assignee.login }.
+  sort_by { |assignee, _issues| assignee }
+
+grouped_issues.each do |assignee, issues|
+  puts Rainbow("== #{assignee} (#{issues.count})").bright.yellow
+  issues.each do |issue|
+    puts [
+      Rainbow("#{issue.repository.name}##{issue.number}:").color("#333333"),
+      issue.title,
+      Rainbow(issue.html_url).blue.underline,
+    ].join(" ")
+  end
+  puts
+end
