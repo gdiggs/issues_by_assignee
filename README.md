@@ -11,6 +11,8 @@ GITHUB_TOKEN=
 GITHUB_ORG=
 ```
 
+Run it by either running the script or building the Docker image
+
 ## License
 
 Copyright 2017 Gordon Diggs
