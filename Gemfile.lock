@@ -36,7 +36,7 @@ GEM
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
     public_suffix (3.0.3)
-    rack (2.2.2)
+    rack (2.2.3)
     rainbow (3.0.0)
     rake (13.0.1)
     thread_safe (0.3.6)
